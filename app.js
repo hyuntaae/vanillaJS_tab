@@ -114,18 +114,24 @@ for (let i = 0; i < 3; i++) {
 - 반복하는 횟수(지금은 3이라고 하드코딩 됨)에 숫자 3 대신 현재 탭의 갯수를 알아내는 코드를 작성하면 될듯하다.
 - 클래스를 모두 찾아주는 셀렉터 getElementsByClassName 뒤에 .length를 붙이면 갯수를 세어줍니다.
 
+- tab을 열어주는 기능을 함수로 만들어 재사용을 고려함.
+
 */
 
 let tabCount = document.getElementsByClassName('tab-btn').length;
 
+function openTab(i) {
+  for (let x = 0; x < tabCount; x++) {
+    tabBtn[x].classList.remove('active')
+    tabContent[x].classList.remove('show')
+  }
+  tabBtn[i].classList.add('active')
+  tabContent[i].classList.add('show')
+}
+
 for (let i = 0; i < tabCount; i++) {
   tabBtn[i].addEventListener('click', function(){
-    for (let x = 0; x < tabCount; x++) {
-      tabBtn[x].classList.remove('active')
-      tabContent[x].classList.remove('show')
-    }
-    tabBtn[i].classList.add('active')
-    tabContent[i].classList.add('show')
+    openTab(i)
   })
 }
 

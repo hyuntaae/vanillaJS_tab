@@ -1,4 +1,5 @@
 /*
+
 ****** 기능 정의 ******
 
 0번 버튼 클릭 시
@@ -70,9 +71,7 @@ tabBtn[2].addEventListener('click', function(){
   두번째 반복문 실행 -> i = 1 -> 두번째 버튼이 동작하도록
   세번째 반복문 실행 -> i = 2 -> 세번째 버튼이 동작하도록
 
-*/
 
-/*
 
 for (let i = 0; i < 3; i++) {
   tabBtn[i].addEventListener('click', function(){
@@ -87,14 +86,12 @@ for (let i = 0; i < 3; i++) {
   })
 }
 
-*/
 
-/* 
 - 클래스 제거해주는 초기화 코드도 번호만 바뀐채 반복하고 있으므로 이것도 반복문으로 만들어주면 될듯
 - 첫번째 반복문 실행 -> 0번 버튼과 컨텐츠박스 클래스 제거
   두번째 반복문 실행 -> 1번 버튼과 컨텐츠박스 클래스 제거
   세번째 반복문 실행 -> 2번 버튼과 컨텐츠박스 클래스 제거
-*/
+
 
 for (let i = 0; i < 3; i++) {
   tabBtn[i].addEventListener('click', function(){
@@ -106,3 +103,29 @@ for (let i = 0; i < 3; i++) {
     tabContent[i].classList.add('show')
   })
 }
+
+*/
+
+/*
+
+****** 확장성 있는 코드로 변경 ******
+
+- 나중에 탭 갯수가 늘어나도 코드 수정 없이 잘 동작하는 코드를 만들 수 없을까
+- 반복하는 횟수(지금은 3이라고 하드코딩 됨)에 숫자 3 대신 현재 탭의 갯수를 알아내는 코드를 작성하면 될듯하다.
+- 클래스를 모두 찾아주는 셀렉터 getElementsByClassName 뒤에 .length를 붙이면 갯수를 세어줍니다.
+
+*/
+
+let tabCount = document.getElementsByClassName('tab-btn').length;
+
+for (let i = 0; i < tabCount; i++) {
+  tabBtn[i].addEventListener('click', function(){
+    for (let x = 0; x < tabCount; x++) {
+      tabBtn[x].classList.remove('active')
+      tabContent[x].classList.remove('show')
+    }
+    tabBtn[i].classList.add('active')
+    tabContent[i].classList.add('show')
+  })
+}
+
